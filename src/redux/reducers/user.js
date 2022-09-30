@@ -9,7 +9,7 @@ function user(state = INITIAL_STATE, action) {
   case USER_INFO:
     return {
       ...state,
-      ...action.payload,
+      email: action.payload,
     };
 
   default:
