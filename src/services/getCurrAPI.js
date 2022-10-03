@@ -1,5 +1,7 @@
-const getCurrencyConverter = async (currency) => {
-  const response = await fetch(`https://economia.awesomeapi.com.br/json/last/${currency}`);
+const ENDPOINT = 'https://economia.awesomeapi.com.br/json/all';
+
+const getCurrencyConverter = async () => {
+  const response = await fetch(ENDPOINT);
   const json = await response.json();
 
   return json;

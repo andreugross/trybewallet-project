@@ -1,4 +1,4 @@
-import { WALLET_INFO } from '../actions';
+import { WALLET_INFO, CURR_SUCCESS, CURR_FAIL } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -13,6 +13,18 @@ function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       ...action.payload,
+    };
+
+  case CURR_SUCCESS:
+    return {
+      ...state,
+      currencies: Object.keys(action.payload),
+    };
+
+  case CURR_FAIL:
+    return {
+      ...state,
+      error: action.err,
     };
 
   default:
