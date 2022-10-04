@@ -41,49 +41,20 @@ class WalletForm extends Component {
     // console.log(currencies);
     return (
       <form>
-        <label htmlFor="value-input">
-          Valor:
-          <input
-            data-testid="value-input"
-            name="value"
-            value={ value }
-            type="number"
-            id="value-input"
+
+        <label htmlFor="description-input">
+          Descrição da despesa
+          <textarea
+            data-testid="description-input"
+            name="description"
+            id="description-input"
+            value={ description }
             onChange={ this.handleOnChange }
           />
         </label>
 
-        <label htmlFor="currency-input">
-          Moeda:
-          <select
-            data-testid="currency-input"
-            name="currency"
-            value={ currency }
-            id="currency-input"
-            onChange={ this.handleOnChange }
-          >
-            {currencies.map((e, i) => (<option key={ i } value={ e }>{e}</option>))}
-            {console.log(currencies)}
-          </select>
-        </label>
-
-        <label htmlFor="method-input">
-          Método de pagamento:
-          <select
-            data-testid="method-input"
-            name="method"
-            id="method-input"
-            value={ method }
-            onChange={ this.handleOnChange }
-          >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </select>
-        </label>
-
         <label htmlFor="tag-input">
-          Categoria:
+          Categoria da despesa
           <select
             name="tag"
             value={ tag }
@@ -99,15 +70,44 @@ class WalletForm extends Component {
           </select>
         </label>
 
-        <label htmlFor="description-input">
-          Descrição:
-          <textarea
-            data-testid="description-input"
-            name="description"
-            id="description-input"
-            value={ description }
+        <label htmlFor="value-input">
+          Valor
+          <input
+            data-testid="value-input"
+            name="value"
+            value={ value }
+            type="number"
+            id="value-input"
             onChange={ this.handleOnChange }
           />
+        </label>
+
+        <label htmlFor="method-input">
+          Método de pagamento
+          <select
+            data-testid="method-input"
+            name="method"
+            id="method-input"
+            value={ method }
+            onChange={ this.handleOnChange }
+          >
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
+          </select>
+        </label>
+
+        <label htmlFor="currency-input">
+          Moeda
+          <select
+            data-testid="currency-input"
+            name="currency"
+            value={ currency }
+            id="currency-input"
+            onChange={ this.handleOnChange }
+          >
+            {currencies.map((e, i) => (<option key={ i } value={ e }>{e}</option>))}
+          </select>
         </label>
 
         <button type="button" onClick={ this.handleOnClick }>Adicionar Despesa</button>
