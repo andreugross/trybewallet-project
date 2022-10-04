@@ -2,6 +2,15 @@ import getCurrencyConverter from '../../services/getCurrAPI';
 
 const USER_INFO = 'USER_INFO';
 const WALLET_INFO = 'WALLET_INFO';
+
+function userAction(payload) {
+  return { type: USER_INFO, payload };
+}
+
+function walletAction(payload) {
+  return { type: WALLET_INFO, payload };
+}
+
 const GET_CURR = 'GET_CURR';
 const CURR_SUCCESS = 'CURR_SUCCESS';
 const CURR_FAIL = 'CURR_FAIL';
@@ -34,21 +43,48 @@ function fetchWithThunk() {
     }
   };
 }
+// -------------------------------------- //
+const GET_EXPENSE = 'GET_EXPENSE';
+const EXP_SUCCESS = 'EXP_SUCCESS';
+// const EXP_FAIL = 'EXP_FAIL';
 
-export const userAction = (payload) => ({
-  type: USER_INFO,
-  payload,
+// VAI BUSCAR COISAS NA MINHA API
+const actExpense = () => ({ type: GET_EXPENSE });
+
+const actGetExpenseSuccess = (expenses, payload) => ({
+  type: EXP_SUCCESS,
+  payload: {
+    ...payload,
+    exchangeRates: expenses,
+  },
 });
 
-export const walletAction = (payload) => ({
-  type: WALLET_INFO,
-  payload,
-});
+/* const actExpenseFail = () => ({
+  type: EXP_FAIL,
+}); */
+
+// THUNK É UMA FUNÇÃO QUE RETORNA UMA OUTRA FUNÇÃO
+function fetchExpense(payload) {
+  // RECEBE ALGUMAS COISAS COMO PARAMETRO
+  return async (dispatch) => {
+    // LOGICA
+    dispatch(actExpense());
+    const expenses = await getCurrencyConverter();
+    // console.log(currency);
+    delete expenses.USDT;
+    dispatch(actGetExpenseSuccess(expenses, payload));
+  };
+}
 
 export {
   USER_INFO,
   WALLET_INFO,
   CURR_SUCCESS,
   CURR_FAIL,
+  EXP_SUCCESS,
+  // EXP_FAIL,
+  userAction,
+  walletAction,
   fetchWithThunk,
+  fetchExpense,
 };
