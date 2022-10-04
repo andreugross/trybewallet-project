@@ -1,4 +1,9 @@
-import { WALLET_INFO, CURR_SUCCESS, CURR_FAIL, EXP_SUCCESS } from '../actions';
+import {
+  WALLET_INFO,
+  CURR_SUCCESS,
+  CURR_FAIL,
+  EXP_SUCCESS,
+  DELETE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -29,6 +34,9 @@ function wallet(state = INITIAL_STATE, action) {
 
   case EXP_SUCCESS:
     return { ...state, expenses: [...state.expenses, action.payload] };
+
+  case DELETE_EXPENSE:
+    return { ...state, expenses: action.payload };
 
   default:
     return state;
